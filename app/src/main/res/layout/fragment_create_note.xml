@@ -235,6 +235,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutWebUrl" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNoteDesc"
+        android:id="@+id/layoutCheckList"
+        android:orientation="vertical">
+
+        <com.dvdb.materialchecklist.MaterialChecklist
+            android:id="@+id/etChecklist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@null"
+            android:hint="@string/checklist"
+            android:padding="@dimen/_10sdp"
+            app:text_color="@color/ColorWhite"
+            app:text_size="@dimen/_12ssp"
+            app:checkbox_tint_color="@color/ColorYellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etNoteDesc"/>
+
+    </LinearLayout>
+
+
     <EditText
         android:id="@+id/etNoteDesc"
         android:layout_width="match_parent"
@@ -250,7 +277,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWebLink" />
+        app:layout_constraintTop_toBottomOf="@id/tvWebLink"/>
 
     <FrameLayout
         android:layout_width="match_parent"

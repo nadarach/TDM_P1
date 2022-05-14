@@ -27,10 +27,15 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.codingwithme.notesapp.database.NotesDatabase
 import com.codingwithme.notesapp.entities.Notes
 import com.codingwithme.notesapp.util.NoteBottomSheetFragment
+import com.dvdb.materialchecklist.MaterialChecklist
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_create_note.*
+import kotlinx.android.synthetic.main.fragment_create_note.imgMore
+import kotlinx.android.synthetic.main.fragment_create_note.layoutImage
+import kotlinx.android.synthetic.main.fragment_create_note.layoutWebUrl
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
 import kotlinx.android.synthetic.main.item_rv_notes.view.*
 import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -47,6 +52,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     private var REQUEST_CODE_IMAGE = 456
     private var selectedImagePath = ""
     private var webLink = ""
+    private var checkList = ""
     private var noteId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +116,16 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
                         imgUrlDelete.visibility = View.GONE
                         layoutWebUrl.visibility = View.GONE
                     }
+
+                    if(notes.checklist != ""){
+                        checkList = notes.checklist!!
+                        etChecklist.setItems(checkList)
+                        layoutCheckList.visibility = View.VISIBLE
+                    }
+                    else{
+                        layoutCheckList.visibility = View.GONE
+                    }
+
                 }
             }
         }
@@ -153,7 +169,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
             if (etWebLink.text.toString().trim().isNotEmpty()){
                 checkWebUrl()
             }else{
-                Toast.makeText(requireContext(),"Url is Required",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"L'URL est obligatoire",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -179,6 +195,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
             startActivity(intent)
         }
 
+
     }
 
 
@@ -195,6 +212,8 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
                 notes.color = selectedColor
                 notes.imgPath = selectedImagePath
                 notes.webLink = webLink
+            //    notes.checklist = checkList
+                notes.checklist = etChecklist.getItems()
 
                 NotesDatabase.getDatabase(it).noteDao().updateNote(notes)
                 etNoteTitle.setText("")
@@ -203,6 +222,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
                 layoutImage.visibility = View.GONE
                 imgNote.visibility = View.GONE
                 tvWebLink.visibility = View.GONE
+                layoutCheckList.visibility = View.GONE
                 requireActivity().supportFragmentManager.popBackStack()
             }
         }
@@ -210,16 +230,16 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     private fun saveNote(){
 
         if (etNoteTitle.text.isNullOrEmpty()){
-            Toast.makeText(context,"Note Title is Required",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Title Required",Toast.LENGTH_SHORT).show()
         }
         else if (etNoteSubTitle.text.isNullOrEmpty()){
 
-            Toast.makeText(context,"Note Sub Title is Required",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Sub-Title Required",Toast.LENGTH_SHORT).show()
         }
 
         else if (etNoteDesc.text.isNullOrEmpty()){
 
-            Toast.makeText(context,"Note Description is Required",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Note Description Required",Toast.LENGTH_SHORT).show()
         }
 
         else{
@@ -233,6 +253,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
             notes.color = selectedColor
             notes.imgPath = selectedImagePath
             notes.webLink = webLink
+            notes.checklist = etChecklist.getItems()
             context?.let {
                 NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
                 etNoteTitle.setText("")
@@ -321,11 +342,18 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
                 "Image" ->{
                     readStorageTask()
                     layoutWebUrl.visibility = View.GONE
+                 //   layoutCheckList.visibility = View.GONE
+
                 }
 
                 "WebUrl" ->{
                     layoutWebUrl.visibility = View.VISIBLE
                 }
+
+                "CheckList" ->{
+                    layoutCheckList.visibility = View.VISIBLE
+                }
+
                 "DeleteNote" -> {
                     //delete note
                     deleteNote()
@@ -336,6 +364,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
                     layoutImage.visibility = View.GONE
                     imgNote.visibility = View.GONE
                     layoutWebUrl.visibility = View.GONE
+                    layoutCheckList.visibility = View.GONE
                     selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
 

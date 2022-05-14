@@ -200,6 +200,12 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }
+        layoutChecklist.setOnClickListener{
+            val intent = Intent("bottom_sheet_action")
+            intent.putExtra("action","Checklist")
+            LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
+            dismiss()
+        }
         layoutDeleteNote.setOnClickListener {
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action","DeleteNote")
