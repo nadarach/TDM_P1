@@ -9,7 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.codingwithme.notesapp.R
 import com.codingwithme.notesapp.entities.Notes
+import kotlinx.android.synthetic.main.fragment_create_note.view.*
 import kotlinx.android.synthetic.main.item_rv_notes.view.*
+import kotlinx.android.synthetic.main.item_rv_notes.view.imgNote
+import kotlinx.android.synthetic.main.item_rv_notes.view.tvDateTime
+import kotlinx.android.synthetic.main.item_rv_notes.view.tvWebLink
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -60,6 +64,13 @@ class NotesAdapter() :
         }else{
             holder.itemView.tvWebLink.visibility = View.GONE
         }
+
+        /*if (arrList[position].checklist != ""){
+            holder.itemView.etChecklist.setItems(arrList[position].checklist!!)
+            holder.itemView.etChecklist.visibility = View.VISIBLE
+        }else{
+            holder.itemView.etChecklist.visibility = View.GONE
+        }*/
 
         holder.itemView.cardView.setOnClickListener {
             listener!!.onClicked(arrList[position].id!!)
