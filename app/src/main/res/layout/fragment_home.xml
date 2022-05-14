@@ -5,56 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
+    android:foregroundTint="#2196F3"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_15ssp"
-        android:text="@string/notes"
+        android:fontFamily="@font/manrope_bold"
         android:paddingStart="@dimen/_10sdp"
         android:paddingTop="@dimen/_10sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/notes"
+        android:textColor="@color/ColorWhite"
+        android:textSize="@dimen/_15ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/manrope_bold"
-        android:textColor="@color/ColorWhite"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:searchIcon="@drawable/ic_search"
         android:background="@drawable/background"
-        android:queryHint="@string/search"
-        android:theme="@style/ThemeOverlay.search"
         android:iconifiedByDefault="false"
-        app:layout_constraintTop_toBottomOf="@id/tv1"
-        app:layout_constraintStart_toStartOf="parent"
+        android:queryHint="@string/search"
+        android:searchIcon="@drawable/ic_search"
+        android:theme="@style/ThemeOverlay.search"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/search_view"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/recycler_view"/>
+        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/colorPrimary"
+        android:orientation="horizontal"
         android:padding="@dimen/_10sdp"
         android:visibility="invisible"
-        android:orientation="horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -65,9 +68,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_image"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_image"
             app:tint="@color/ColorWhite" />
 
         <ImageView
@@ -80,16 +83,37 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBtnCreateNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:id="@+id/fabBtnCreateNote"
-        android:tint="@color/ColorWhite"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_add"
+        android:tint="@color/ColorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:rotationY="180"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add"/>
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        app:srcCompat="@drawable/ic_baseline_sort_24" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        app:srcCompat="@drawable/ic_baseline_sort_by_alpha_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
