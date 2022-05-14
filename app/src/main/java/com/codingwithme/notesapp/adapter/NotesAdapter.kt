@@ -35,6 +35,11 @@ class NotesAdapter() :
         listener = listener1
     }
 
+//    fun sortByName(){
+//        arrList.sortedBy { it.title }.forEach{ println("AAAAAAAAAAAAAAA"+it.title)}
+//        notifyDataSetChanged()
+//    }
+
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
 
         holder.itemView.tvTitle.text = arrList[position].title

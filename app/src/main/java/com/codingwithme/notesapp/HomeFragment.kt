@@ -1,5 +1,6 @@
 package com.codingwithme.notesapp
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codingwithme.notesapp.adapter.NotesAdapter
 import com.codingwithme.notesapp.database.NotesDatabase
@@ -14,6 +16,8 @@ import com.codingwithme.notesapp.entities.Notes
 import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,6 +25,7 @@ class HomeFragment : BaseFragment() {
 
     var arrNotes = ArrayList<Notes>()
     var notesAdapter: NotesAdapter = NotesAdapter()
+    lateinit var noootes: List<Notes>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,6 +52,7 @@ class HomeFragment : BaseFragment() {
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,6 +74,26 @@ class HomeFragment : BaseFragment() {
         fabBtnCreateNote.setOnClickListener {
             replaceFragment(CreateNoteFragment.newInstance(),false)
         }
+
+        alphaSortBtn.setOnClickListener {
+            var tempArr = ArrayList<Notes>()
+            arrNotes.sortedBy { it.title }.forEach{tempArr.add(it)}
+            notesAdapter.setData(tempArr)
+            notesAdapter.notifyDataSetChanged()
+
+        }
+
+        filterSortBtn.setOnClickListener {
+//            var tempArr = ArrayList<Notes>()
+
+//            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+//
+//            arrNotes.sortedByDescending {
+//                LocalDate.parse(it.dateTime, dateTimeFormatter)
+//            }.forEach{println("AAAAAAAAAAAAAAAAAAAAAAAA"+it.dateTime)}
+//            notesAdapter.setData(tempArr)
+//            notesAdapter.notifyDataSetChanged()
+            }
 
         search_view.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {

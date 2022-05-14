@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/alphaSortBtn" />
 
     <LinearLayout
         android:id="@+id/l1"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/filterSortBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -106,14 +106,24 @@
         app:srcCompat="@drawable/ic_baseline_sort_24" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/alphaSortBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/filterSortBtn"
         app:layout_constraintTop_toBottomOf="@+id/search_view"
         app:srcCompat="@drawable/ic_baseline_sort_by_alpha_24" />
+
+    <ImageView
+        android:id="@+id/dateSortBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/alphaSortBtn"
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        app:srcCompat="@drawable/ic_baseline_date_range_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
