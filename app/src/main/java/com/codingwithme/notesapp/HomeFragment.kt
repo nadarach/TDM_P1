@@ -16,7 +16,9 @@ import com.codingwithme.notesapp.entities.Notes
 import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
@@ -83,16 +85,19 @@ class HomeFragment : BaseFragment() {
 
         }
 
-        filterSortBtn.setOnClickListener {
-//            var tempArr = ArrayList<Notes>()
+        dateSortBtn.setOnClickListener {
 
-//            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-//
-//            arrNotes.sortedByDescending {
-//                LocalDate.parse(it.dateTime, dateTimeFormatter)
-//            }.forEach{println("AAAAAAAAAAAAAAAAAAAAAAAA"+it.dateTime)}
-//            notesAdapter.setData(tempArr)
-//            notesAdapter.notifyDataSetChanged()
+            var tempArr = ArrayList<Notes>()
+
+
+
+            val pattern = DateTimeFormatter.ofPattern(("dd/M/yyyy hh:mm:ss"))
+            arrNotes.sortedBy {
+                notes -> LocalDate.parse(notes.dateTime, pattern)
+
+            }.forEach{tempArr.add(it)}
+            notesAdapter.setData(tempArr)
+            notesAdapter.notifyDataSetChanged()
             }
 
         search_view.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
